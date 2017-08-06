@@ -3,6 +3,7 @@ package com.fit.dao;
 
 import com.fit.model.CFMEMemberModel;
 import java.util.List;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,10 +21,22 @@ public class CFMEMemberDAOImpl implements CFMEMemberDAO {
     private SessionFactory sessionFactory;
     
     @Override
-    public void saveMember(CFMEMemberModel member) {
+    public void addMember(CFMEMemberModel member) {
        getSession().save(member);
     }
 
+    @Override
+    public void updateMember(CFMEMemberModel member) {
+        getSession().update(member);
+    }
+    
+    @Override
+    public void deleteMember(int id) {
+        String hql = "DELETE FROM CFMemberModel WHERE id = " + id;
+        Query q = getSession().createQuery(hql);
+        q.executeUpdate();
+    }
+    
     @Override
     public CFMEMemberModel findMember(int id) {
         return null;   

@@ -10,11 +10,17 @@ import java.util.List;
  */
 public interface CFMEMemberDAO {
     
-    public void saveMember(CFMEMemberModel member);
+    public void addMember(CFMEMemberModel member);
+    
+    public void updateMember(CFMEMemberModel member);
+    
+    public void deleteMember(int id);
     
     public CFMEMemberModel findMember(int id);
     
     public CFMEMemberModel findMember(String na);
      
     public List<CFMEMemberModel> getMembers(); 
+    
+    
 }
