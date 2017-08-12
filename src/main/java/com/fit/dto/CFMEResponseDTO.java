@@ -2,6 +2,7 @@
 package com.fit.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fit.constants.CFMEMessageConstants;
 
 /**
  *
@@ -20,15 +21,15 @@ public class CFMEResponseDTO {
     public static String getMessage(int inCode) {
         switch (inCode) {
             case 1:
-                return "Data saved";
+                return CFMEMessageConstants.SAVED_SUCCESSFULLY;
             case 2:
-                return "Data updated";
+                return CFMEMessageConstants.UPDATED_SUCCESSFULLY;
             case 3:
-                return "Deleted successfuly";
+                return CFMEMessageConstants.DELETED_SUCCESSFULLY;
             case 4:
-                return "Error occured";
+                return CFMEMessageConstants.ERROR_OCCURED;
             default:
-                return "Unknown error";
+                return CFMEMessageConstants.UNKNOWN_ERROR;
         }
     }
 

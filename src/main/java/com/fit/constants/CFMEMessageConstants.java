@@ -11,7 +11,11 @@ package com.fit.constants;
  */
 public class CFMEMessageConstants {
     
-    public static final String SAVED_SUCCESSFULLY = "Saved Successfully";
+    public static final String SAVED_SUCCESSFULLY = "Data Saved Successfully";
     public static final String DELETED_SUCCESSFULLY = "Deleted Successfully";
+    public static final String UPDATED_SUCCESSFULLY = "Data Updated Successfully";
+    public static final String ERROR_OCCURED = "Error Occured";
+    public static final String UNKNOWN_ERROR = "Unknown Error";
+    
     
 }
