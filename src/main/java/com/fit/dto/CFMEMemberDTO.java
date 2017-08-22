@@ -17,6 +17,17 @@ public class CFMEMemberDTO {
     private String email;
     private LocalDate dateOfBirth;
     private String address;
+    
+    public CFMEMemberDTO(int id, String firstName, String lastName, int age,
+            String email, LocalDate dateOfBirth, String address) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+    }
 
     public int getId() {
         return id;

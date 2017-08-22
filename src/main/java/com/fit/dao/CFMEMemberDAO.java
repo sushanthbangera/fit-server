@@ -4,6 +4,7 @@ package com.fit.dao;
 import com.fit.model.CFMEMemberModel;
 import java.util.List;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,7 +44,10 @@ public class CFMEMemberDAO {
     }
 
     public List<CFMEMemberModel> getMembers() {
-        return null;
+        CriteriaQuery<CFMEMemberModel> cq = getSession().getCriteriaBuilder().createQuery(CFMEMemberModel.class);
+        cq.from(CFMEMemberModel.class);
+        List<CFMEMemberModel> membersList = getSession().createQuery(cq).getResultList();
+        return membersList;
     }
 
     public Session getSession() {

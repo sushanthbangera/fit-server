@@ -1,6 +1,7 @@
 
 package com.fit.model;
 
+import com.fit.dto.CFMEMemberDTO;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

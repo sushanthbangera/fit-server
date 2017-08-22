@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.fit.service;
 
 import com.fit.dao.CFMEMemberDAO;
 import com.fit.dto.CFMEMemberDTO;
 import com.fit.dto.CFMEResponseDTO;
 import com.fit.model.CFMEMemberModel;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,12 +26,7 @@ public class CFMEMemberServiceImpl implements CFMEMemberService {
         CFMEResponseDTO mRespObj = null;
         try {
             CFMEMemberModel member = new CFMEMemberModel();
-            member.setFirstName(memberDTO.getFirstName());
-            member.setLastName(memberDTO.getLastName());
-            member.setAge(memberDTO.getAge());
-            member.setDateOfBirth(memberDTO.getDateOfBirth());
-            member.setContact(memberDTO.getContact());
-            member.setEmail(memberDTO.getEmail());
+            createMemberDTO(member, memberDTO);
             if (memberDTO.getId() != 0) {
                 member.setId(memberDTO.getId());
                 memberDAO.updateMember(member);
@@ -48,6 +40,15 @@ public class CFMEMemberServiceImpl implements CFMEMemberService {
             return mRespObj;
         }
     }
+    
+    private void createMemberDTO(CFMEMemberModel member, CFMEMemberDTO memberDTO) {
+        member.setFirstName(memberDTO.getFirstName());
+        member.setLastName(memberDTO.getLastName());
+        member.setAge(memberDTO.getAge());
+        member.setDateOfBirth(memberDTO.getDateOfBirth());
+        member.setContact(memberDTO.getContact());
+        member.setEmail(memberDTO.getEmail());
+    }
 
     @Override
     @SuppressWarnings("finally")
@@ -55,6 +56,7 @@ public class CFMEMemberServiceImpl implements CFMEMemberService {
         CFMEResponseDTO mRespObj = null;
         try {
             memberDAO.deleteMember(id);
+            mRespObj = new CFMEResponseDTO(2);
         } catch (Exception e) {
         } finally {
             return mRespObj;
@@ -73,7 +75,18 @@ public class CFMEMemberServiceImpl implements CFMEMemberService {
 
     @Override
     public List<CFMEMemberDTO> getMembers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<CFMEMemberDTO> members = new ArrayList<>();
+        try {
+            List<CFMEMemberModel> memberModelList = memberDAO.getMembers();
+
+            memberModelList.stream().map((member) -> new CFMEMemberDTO(member.getId(), member.getFirstName(), member.getLastName(),
+                    member.getAge(), member.getEmail(), member.getDateOfBirth(), member.getAddress())).forEach((memberObj) -> {
+                        members.add(memberObj);
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return members;
     }
     
 }

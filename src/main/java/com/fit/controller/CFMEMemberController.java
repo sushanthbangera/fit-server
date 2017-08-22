@@ -4,6 +4,7 @@ package com.fit.controller;
 import com.fit.dto.CFMEMemberDTO;
 import com.fit.dto.CFMEResponseDTO;
 import com.fit.service.CFMEMemberService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,12 @@ public class CFMEMemberController {
        HttpHeaders responseHeaders = new HttpHeaders();  	        
        responseHeaders.set("Access-Control-Allow-Origin", "*");
        return new ResponseEntity<>(responseObj, responseHeaders, HttpStatus.OK);
+   }
+   
+   @RequestMapping(value = "/members", method = RequestMethod.GET)
+   public ResponseEntity getMembers() {
+       List<CFMEMemberDTO> members = memberService.getMembers();
+       return new ResponseEntity<>(members, HttpStatus.OK);
    }
    
 }
